@@ -52,7 +52,7 @@ for (const el of document.querySelectorAll('.my-lightbox-toggle')) {
 
 ## Contributing
 Lightbox for Bootstrap 5 is written in pure JavaScript.
-Modify the src/index.js file, run `npm run build` and create a pull request.
+Modify the src/index.js file, run `npm run build` and create a pull request. (Requires [webpack](https://www.npmjs.com/package/webpack) to be installed for building)
 
 You can help make this project even better and keep it up to date by making a small contribution! [Fund this project](https://github.com/sponsors/trvswgnr).
 
