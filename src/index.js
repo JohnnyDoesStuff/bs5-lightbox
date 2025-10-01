@@ -56,7 +56,7 @@ class Lightbox {
 
 	hide() {
 		this.modal.hide();
-		window.location.hash = "";
+		window.history.replaceState(null, null, '#');
 	}
 	setOptionsFromSettings(obj) {
 		return Object.keys(obj).reduce((p, c) => Object.assign(p, { [c]: this.settings[c] }), {});
@@ -247,7 +247,7 @@ class Lightbox {
 		this.modalElement.querySelector('.modal-body').appendChild(this.carouselElement);
 		this.modalElement.addEventListener('hidden.bs.modal', () => {
 				this.modalElement.remove()
-				window.location.hash = "";
+				window.history.replaceState(null, null, '#');
 			}
 		);
 		this.modal = new bootstrap.Modal(this.modalElement, this.modalOptions);
