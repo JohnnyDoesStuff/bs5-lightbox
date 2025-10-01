@@ -43,9 +43,20 @@ class Lightbox {
 	show() {
 		document.body.appendChild(this.modalElement);
 		this.modal.show();
+
+		window.location.hash = "lightbox-modal";
+		const handleHashChange = (event) => {
+			if (window.location.hash === "") {
+				this.modal.hide();
+				window.removeEventListener('hashchange', handleHashChange);
+			}
+		};
+		window.addEventListener('hashchange', handleHashChange)
 	}
+
 	hide() {
 		this.modal.hide();
+		window.location.hash = "";
 	}
 	setOptionsFromSettings(obj) {
 		return Object.keys(obj).reduce((p, c) => Object.assign(p, { [c]: this.settings[c] }), {});
@@ -234,8 +245,11 @@ class Lightbox {
 		template.innerHTML = html.trim();
 		this.modalElement = template.content.firstChild;
 		this.modalElement.querySelector('.modal-body').appendChild(this.carouselElement);
-		this.modalElement.addEventListener('hidden.bs.modal', () => this.modalElement.remove());
-		this.modalElement.querySelector('[data-bs-dismiss]').addEventListener('click', () => this.modal.hide());
+		this.modalElement.addEventListener('hidden.bs.modal', () => {
+				this.modalElement.remove()
+				window.location.hash = "";
+			}
+		);
 		this.modal = new bootstrap.Modal(this.modalElement, this.modalOptions);
 		return this.modal;
 	}
